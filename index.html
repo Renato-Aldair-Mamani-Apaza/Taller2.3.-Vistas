@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratorio 11 - Vistas SQL | Renato Mamani</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: 0 auto; padding: 20px; background-color: #f0f2f5; }
+        header { background: #003566; color: white; padding: 30px; text-align: center; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .container { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.05); }
+        h2 { color: #003566; border-bottom: 3px solid #ffc300; padding-bottom: 10px; margin-top: 30px; }
+        h3 { color: #001d3d; margin-top: 25px; }
+        pre { background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 8px; overflow-x: auto; font-family: 'Consolas', monospace; border-left: 5px solid #ffc300; }
+        .result-box { background: #e9ecef; border: 2px dashed #adb5bd; border-radius: 8px; padding: 20px; text-align: center; margin: 15px 0; color: #495057; font-style: italic; }
+        .conclusion-card { background: #fff3cd; border-left: 5px solid #ffc300; padding: 20px; margin-top: 20px; border-radius: 4px; }
+        footer { text-align: center; margin-top: 50px; padding: 20px; color: #6c757d; border-top: 1px solid #dee2e6; }
+        .tag { background: #003566; color: #ffc300; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Guía de Laboratorio N° 11</h1>
+    <p>Asignatura: Modelado de Base de Datos</p>
+    <p><strong>Estudiante: Renato Aldair Mamani Apaza</strong></p>
+</header>
+
+<div class="container">
+    <h2>1. Introducción</h2>
+    <p>En este laboratorio se ha implementado una base de datos relacional para una clínica, aplicando el concepto de <strong>Vistas (Views)</strong> en Oracle SQL para simplificar consultas y mejorar la seguridad de los datos.</p>
+
+    <h2>2. Scripts de Creación y Vistas</h2>
+    <p>A continuación se presenta el código principal utilizado para resolver los ejercicios propuestos en la guía:</p>
+    
+    <pre>
+-- Ejercicio 5.1: Creación de Vista Médicos y Especialidades
+CREATE OR REPLACE VIEW v_Medicos_Especialidades AS
+SELECT M.nombresM, M.paternoM, E.nombreEsp
+FROM tMedico M
+JOIN tEspecialidadDelMedico EM ON M.codM = EM.codM
+JOIN tEspecialidad E ON EM.codEsp = E.codEsp;
+
+-- Ejercicio 5.4: Vista de Enfermedades No Detectadas
+CREATE OR REPLACE VIEW v_Enfermedades_No_Detectadas AS
+SELECT nombreE FROM tEnfermedad
+WHERE codE NOT IN (SELECT codE FROM tEnfermedadEnElDiagnostico);
+    </pre>
+
+    <h2>3. Evidencias de Ejecución</h2>
+    
+    <h3>Ejercicio 5.1 - Listado de Médicos y sus Especialidades</h3>
+    <div class="result-box">
+        [Pega aquí tu captura de la tabla de médicos y especialidades]
+    </div>
+
+    <h3>Ejercicio 5.3 - Médicos con más de 2 especialidades</h3>
+    <div class="result-box">
+        [Pega aquí tu captura del resultado con la cláusula HAVING]
+    </div>
+
+    <h3>Ejercicio 5.7 - Pacientes sin enfermedad diagnosticada</h3>
+    <div class="result-box">
+        [Pega aquí tu captura del resultado de la vista de pacientes]
+    </div>
+
+    <h2>4. Conclusiones</h2>
+    <div class="conclusion-card">
+        <p><strong>Impacto de las Vistas:</strong> Las vistas facilitan el acceso a la información al ocultar la complejidad de los <code>JOINS</code>. Permiten que los usuarios finales consulten datos consolidados sin necesidad de conocer la estructura interna de las tablas, optimizando el tiempo de respuesta y garantizando que la información no se repita innecesariamente.</p>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2026 Renato Aldair Mamani Apaza - Ingeniería de Sistemas<br>
+    Universidad Andina del Cusco</p>
+</footer>
+
+</body>
+</html>
